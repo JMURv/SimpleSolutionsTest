@@ -2,6 +2,10 @@
 
 Тестовый url для проверки (временный): http://typst.ru/item/1/
 
+### Команды для запуска:
+- Локальный запуск: `poetry run python manage.py runserver localhost:8000`
+- Запуск контейнера (требут конфигурации nginx): `docker-compose up`
+
 ### Задача
 
 -	✅ Реализовать Django + Stripe API бэкенд со следующим функционалом и условиями:
