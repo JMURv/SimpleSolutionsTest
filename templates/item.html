@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>{{ item.name }}</title>
+        <script src="https://js.stripe.com/v3/"></script>
+    </head>
+    <body>
+        <h3>{{ item.name }}</h3>
+        <p>{{ item.description }}</p>
+        <p>{{ item.price }}</p>
+        <form method="POST" action="{% url 'item-handler' item.id %}">
+            {% csrf_token %}
+            <button id="addToCart" type="submit">
+                Add to cart
+            </button>
+        </form>
+
+        <button id="buy">Buy</button>
+    </body>
+    <script>
+        const pubKey = "{{ public_key }}"
+        const stripe = Stripe(pubKey)
+        document.getElementById('buy').addEventListener('click', function (evt) {
+            fetch('/buy/' + {{ item.id }})
+                .then(function (response) {
+                    return response.json()
+                })
+                .then(function (session) {
+                    return stripe.redirectToCheckout({sessionId: session.id})
+                })
+                .then(function (result) {
+                    if (result.error) {
+                        alert(result.error.message)
+                    }
+                })
+                .catch(function (error) {
+                    console.error('Error:', error)
+                })
+        })
+    </script>
+</html>
