@@ -6,5 +6,11 @@ start:
 items:
 	poetry run python manage.py create_items
 
-up:
+prod:
 	docker-compose up
+
+dev:
+	docker-compose -f docker-compose.dev.yml up
+
+down:
+	docker-compose down

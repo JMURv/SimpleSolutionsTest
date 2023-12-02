@@ -12,5 +12,3 @@ RUN poetry config installer.max-workers 10
 RUN poetry config virtualenvs.create false && poetry install --no-interaction --no-ansi
 
 COPY . ./
-
-EXPOSE 8000

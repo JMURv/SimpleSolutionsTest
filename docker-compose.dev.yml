@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: Dockerfile
     env_file:
-      - ./.env.prod
+      - ./.env.dev
     volumes:
       - .:/app
     ports:
@@ -17,7 +17,7 @@ services:
     command: sh -c "poetry run python manage.py makemigrations &&
       poetry run python manage.py migrate &&
       poetry run python manage.py create_items &&
-      poetry run gunicorn --workers=4 --reload --max-requests=1000 SimpleSolutionsTestTask.wsgi -b 0.0.0.0:8050"
+      poetry run python manage.py runserver localhost:8000"
 
   nginx:
     container_name: nginx_simple_solutions
@@ -28,7 +28,7 @@ services:
       - "8080:80"
       - "4443:443"
     volumes:
-      - ./nginx/prod/default.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/dev/default.conf:/etc/nginx/conf.d/default.conf
     links:
       - backend
     depends_on:

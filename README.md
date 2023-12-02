@@ -3,8 +3,8 @@
 Тестовый url для проверки (временный): http://typst.ru/item/1/
 
 ### Команды для запуска:
-- Локальный запуск: `poetry run python manage.py runserver localhost:8000`
-- Запуск контейнера (требут конфигурации nginx): `docker-compose up`
+- Локальный запуск: `make dev`
+- Продакшн запуск: `make prod`
 
 ### Задача
 
